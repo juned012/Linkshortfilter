@@ -74,7 +74,7 @@ const App = () => {
               value={sortOrder}
               onChange={(e) => setSortOrder(e.target.value)}
             >
-              <option value="ascending">Ascending</option>
+              <option value="assending">Ascending</option>
               <option value="descending">Descending</option>
             </select>
           </div>
