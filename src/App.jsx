@@ -52,13 +52,13 @@ const App = () => {
       {search ? (
         ""
       ) : (
-        <div>
+        <div className="flex gap-10">
           <div className="mb-4">
-            <span className="block mb-2 text-gray-700">Filter by city</span>
+            <span className="text-gray-700 mr-2">Filter by city:</span>
             <select
               value={filterSearch}
               onChange={(e) => setFilterSearch(e.target.value)}
-              className="w-full p-2 border border-gray-300 rounded shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="p-2 border border-gray-300 rounded shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
             >
               <option value="">Select City</option>
               {Data.map((user, index) => (
@@ -69,10 +69,11 @@ const App = () => {
             </select>
           </div>
           <div>
-            <span>sort by</span>
+            <span className="text-gray-700 mr-2">sort by A-Z:</span>
             <select
               value={sortOrder}
               onChange={(e) => setSortOrder(e.target.value)}
+              className="p-2 border border-gray-300 rounded shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
             >
               <option value="assending">Ascending</option>
               <option value="descending">Descending</option>
