@@ -3,6 +3,7 @@ import Data from "./Data";
 const App = () => {
   const [search, setSearch] = useState("");
   const [filterSearch, setFilterSearch] = useState("");
+  const [sortOrder, setSortOrder] = useState("assending");
   const [filteredData, setFilteredData] = useState(Data);
 
   useEffect(() => {
@@ -18,6 +19,15 @@ const App = () => {
     );
     setFilteredData(filterButton);
   }, [filterSearch]);
+
+  useEffect(() => {
+    const filterSort = filteredData.sort((a, b) =>
+      sortOrder === "assending"
+        ? a.userName.localeCompare(b.userName)
+        : b.userName.localeCompare(a.userName)
+    );
+    setFilteredData([...filterSort]);
+  }, [sortOrder]);
 
   return (
     <div className="max-w-5xl mx-auto py-5 px-4 sm:px-6 lg:px-8">
@@ -42,20 +52,32 @@ const App = () => {
       {search ? (
         ""
       ) : (
-        <div className="mb-4">
-          <span className="block mb-2 text-gray-700">Filter by city</span>
-          <select
-            value={filterSearch}
-            onChange={(e) => setFilterSearch(e.target.value)}
-            className="w-full p-2 border border-gray-300 rounded shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-          >
-            <option value="">Select City</option>
-            {Data.map((user, index) => (
-              <option key={index} value={user.cityName}>
-                {user.cityName}
-              </option>
-            ))}
-          </select>
+        <div>
+          <div className="mb-4">
+            <span className="block mb-2 text-gray-700">Filter by city</span>
+            <select
+              value={filterSearch}
+              onChange={(e) => setFilterSearch(e.target.value)}
+              className="w-full p-2 border border-gray-300 rounded shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+            >
+              <option value="">Select City</option>
+              {Data.map((user, index) => (
+                <option key={index} value={user.cityName}>
+                  {user.cityName}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div>
+            <span>sort by</span>
+            <select
+              value={sortOrder}
+              onChange={(e) => setSortOrder(e.target.value)}
+            >
+              <option value="ascending">Ascending</option>
+              <option value="descending">Descending</option>
+            </select>
+          </div>
         </div>
       )}
       <div>
